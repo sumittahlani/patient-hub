@@ -17,7 +17,8 @@ public class PatientsHubDao {
 	}
 
 	public int save(Patient patient) {
-		return jdbcTemplate.update("INSERT INTO PATIENTS (ID, NAME) VALUES (?, ?)", patient.getId(), patient.getName());
+		return jdbcTemplate.update("INSERT INTO PATIENTS (ID, NAME, AGE, GENDER, NUMBER) VALUES (?, ?, ?, ?, ?)"
+				, patient.getId(), patient.getName(), patient.getAge(), patient.getGender(), patient.getNumber());
 	}
 
 	public boolean delete(int id) {
@@ -26,6 +27,7 @@ public class PatientsHubDao {
 	}
 
 	public boolean update(Patient patient, int id) {
-		return jdbcTemplate.update("UPDATE PATIENTS SET NAME=? WHERE ID=?", patient.getName(), id)==1;
+		return jdbcTemplate.update("UPDATE PATIENTS SET NAME=?, AGE=?, GENDER=?, NUMBER=? WHERE ID=?"
+				, patient.getName(), patient.getAge(), patient.getGender(), patient.getNumber(), id)==1;
 	}
 }
